@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.view.form.inherit.material.issue</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="is_material_issue"
+                       invisible="picking_type_code != 'outgoing'"
+                       readonly="state not in ['draft', 'waiting']"
+                        />
+                <field name="issue_product_id"
+                invisible="is_material_issue == False"
+                required="is_material_issue == True"
+                readonly="state not in ['draft', 'waiting']"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
