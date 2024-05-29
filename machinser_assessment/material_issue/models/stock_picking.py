@@ -16,6 +16,10 @@ class StockPicking(models.Model):
                                        string="Issue Product")
 
     def button_validate(self):
+        """
+        Check if material issue is enabled and
+        issue product has expense account.
+        """
         if self.is_material_issue and \
                 self.issue_product_id.property_account_expense_id:
             for move in self.move_ids:
